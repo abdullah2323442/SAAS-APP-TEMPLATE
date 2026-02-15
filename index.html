@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AuroraFlow — SaaS Template</title>
+    <meta
+      name="description"
+      content="AuroraFlow is a multi-page SaaS website template built with HTML, CSS, and JavaScript."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+    <script>
+      // Apply theme immediately to prevent flash
+      (function() {
+        const savedTheme = localStorage.getItem('auroraflow-theme');
+        if (savedTheme === 'light' || savedTheme === 'dark') {
+          document.documentElement.setAttribute('data-theme', savedTheme);
+        } else {
+          const prefersDark = !window.matchMedia('(prefers-color-scheme: light)').matches;
+          document.documentElement.setAttribute('data-theme', prefersDark ? 'dark' : 'light');
+        }
+      })();
+    </script>
+    <script defer src="js/main.js"></script>
+  </head>
+  <body>
+    <div class="site-shell">
+      <header class="header">
+        <div class="container nav-wrap">
+          <a class="brand" href="index.html">
+            <span class="brand-mark"></span>
+            <span>AuroraFlow</span>
+          </a>
+          <button class="menu-toggle" aria-label="Toggle menu" data-menu-toggle>
+            <span></span><span></span><span></span>
+          </button>
+          <nav class="nav" data-nav>
+            <a href="index.html" class="active">Home</a>
+            <a href="features.html">Features</a>
+            <a href="pricing.html">Pricing</a>
+            <a href="about.html">About</a>
+            <a href="contact.html">Contact</a>
+            <a href="dashboard.html" class="nav-highlight">Dashboard</a>
+          </nav>
+          <a href="contact.html" class="btn btn-sm">Book Demo</a>
+        </div>
+      </header>
+
+      <main>
+        <section class="hero">
+          <div class="container hero-grid">
+            <div>
+              <p class="eyebrow">Scale without operational drag</p>
+              <h1>One command layer for acquisition, onboarding, and expansion.</h1>
+              <p class="lead">
+                AuroraFlow gives SaaS teams a shared operating system to turn customer signals
+                into coordinated action across sales, product, and success.
+              </p>
+              <div class="hero-actions">
+                <a class="btn" href="pricing.html">Start Free Trial</a>
+                <a class="btn btn-ghost" href="features.html">Explore Features</a>
+              </div>
+              <div class="trust-row">
+                <span>Trusted by teams at:</span>
+                <strong>Northstar</strong>
+                <strong>Beamly</strong>
+                <strong>Nexa</strong>
+              </div>
+            </div>
+            <div class="hero-card">
+              <div class="kpi-grid">
+                <article>
+                  <h3 data-counter="98">0</h3>
+                  <p>Workflow reliability</p>
+                </article>
+                <article>
+                  <h3 data-counter="4">0</h3>
+                  <p>Days to go live</p>
+                </article>
+                <article>
+                  <h3 data-counter="42">0</h3>
+                  <p>Integrations</p>
+                </article>
+                <article>
+                  <h3 data-counter="210">0</h3>
+                  <p>Teams onboarded</p>
+                </article>
+              </div>
+              <div class="signal-card">
+                <p>Live Signal</p>
+                <h4>Net revenue retention climbed by 17% in 30 days</h4>
+                <div class="progress"><span style="--w: 78%"></span></div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="container">
+            <div class="section-head">
+              <p class="eyebrow">Why AuroraFlow</p>
+              <h2>Run high-velocity growth programs without tool sprawl.</h2>
+            </div>
+            <div class="card-grid cols-3">
+              <article class="card">
+                <h3>Journey Orchestration</h3>
+                <p>Design lifecycle journeys with visual logic, guardrails, and event-driven actions.</p>
+              </article>
+              <article class="card">
+                <h3>Revenue Intelligence</h3>
+                <p>Prioritize expansion and renewal decisions with real-time health and revenue context.</p>
+              </article>
+              <article class="card">
+                <h3>Smart Automation</h3>
+                <p>Automate repeatable workflows so teams focus on strategic customer outcomes.</p>
+              </article>
+            </div>
+          </div>
+        </section>
+
+        <section class="section soft">
+          <div class="container split">
+            <div>
+              <p class="eyebrow">Built for modern teams</p>
+              <h2>From startup scale to enterprise complexity, stay perfectly aligned.</h2>
+              <p>
+                Replace disconnected systems with one execution layer built for customer-led growth.
+              </p>
+              <ul class="ticks">
+                <li>Unified dashboard for product, sales, and CS</li>
+                <li>Permission controls with role-level visibility</li>
+                <li>Custom analytics with export-ready reports</li>
+              </ul>
+            </div>
+            <div class="panel-list">
+              <article class="panel">
+                <h4>Forecast board</h4>
+                <p>Plan quarter goals with scenario modeling.</p>
+              </article>
+              <article class="panel">
+                <h4>Auto playbooks</h4>
+                <p>Trigger account actions from product usage signals.</p>
+              </article>
+              <article class="panel">
+                <h4>Executive reporting</h4>
+                <p>Deliver board-level insights in one click.</p>
+              </article>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <section class="section cta-band">
+        <div class="container">
+          <article class="cta-card">
+            <div>
+              <h2>Ready to build a compounding growth engine?</h2>
+              <p>Launch AuroraFlow in days and turn every customer signal into fast, coordinated execution.</p>
+            </div>
+            <div class="cta-actions">
+              <a class="btn" href="contact.html">Book a Live Demo</a>
+              <a class="btn btn-ghost" href="pricing.html">See Pricing</a>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <footer class="footer">
+        <div class="container footer-grid">
+          <div>
+            <a class="brand" href="index.html">
+              <span class="brand-mark"></span>
+              <span>AuroraFlow</span>
+            </a>
+            <p>Operational intelligence for SaaS teams that move fast.</p>
+          </div>
+          <div>
+            <h4>Company</h4>
+            <a href="about.html">About</a>
+            <a href="contact.html">Contact</a>
+          </div>
+          <div>
+            <h4>Product</h4>
+            <a href="features.html">Features</a>
+            <a href="pricing.html">Pricing</a>
+          </div>
+        </div>
+      </footer>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Customers — AuroraFlow</title>
+    <meta name="description" content="Manage your customers" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/dashboard.css" />
+    <script>
+      (function() {
+        const savedTheme = localStorage.getItem('auroraflow-theme');
+        if (savedTheme === 'light' || savedTheme === 'dark') {
+          document.documentElement.setAttribute('data-theme', savedTheme);
+        } else {
+          const prefersDark = !window.matchMedia('(prefers-color-scheme: light)').matches;
+          document.documentElement.setAttribute('data-theme', prefersDark ? 'dark' : 'light');
+        }
+      })();
+    </script>
+    <script defer src="js/main.js"></script>
+    <script defer src="js/dashboard.js"></script>
+  </head>
+  <body class="dashboard-layout">
+    <div class="dashboard-shell">
+      <aside class="dashboard-sidebar" data-sidebar>
+        <div class="sidebar-header">
+          <a class="brand" href="index.html">
+            <span class="brand-mark"></span>
+            <span>AuroraFlow</span>
+          </a>
+          <button class="sidebar-toggle" data-sidebar-toggle aria-label="Toggle sidebar">
+            <span></span><span></span><span></span>
+          </button>
+        </div>
+
+        <nav class="sidebar-nav">
+          <a href="dashboard.html" class="nav-item">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+              <rect x="3" y="3" width="6" height="6" rx="1.5" stroke="currentColor" stroke-width="1.5"/>
+              <rect x="11" y="3" width="6" height="6" rx="1.5" stroke="currentColor" stroke-width="1.5"/>
+              <rect x="3" y="11" width="6" height="6" rx="1.5" stroke="currentColor" stroke-width="1.5"/>
+              <rect x="11" y="11" width="6" height="6" rx="1.5" stroke="currentColor" stroke-width="1.5"/>
+            </svg>
+            <span>Overview</span>
+          </a>
+          <a href="customers.html" class="nav-item active">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+              <circle cx="10" cy="7" r="3.5" stroke="currentColor" stroke-width="1.5"/>
+              <path d="M4 17c0-3.3 2.7-6 6-6s6 2.7 6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+            <span>Customers</span>
+          </a>
+          <a href="workflows.html" class="nav-item">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+              <path d="M3 10h14M10 3v14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+              <rect x="3" y="3" width="14" height="14" rx="2" stroke="currentColor" stroke-width="1.5"/>
+            </svg>
+            <span>Workflows</span>
+          </a>
+          <a href="analytics.html" class="nav-item">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+              <path d="M3 6l7-3 7 3v8l-7 3-7-3V6z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+              <path d="M3 6l7 3m0 0l7-3m-7 3v8" stroke="currentColor" stroke-width="1.5"/>
+            </svg>
+            <span>Analytics</span>
+          </a>
+          <a href="automations.html" class="nav-item">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+              <circle cx="10" cy="10" r="7" stroke="currentColor" stroke-width="1.5"/>
+              <path d="M10 6v4l3 2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+            <span>Automations</span>
+          </a>
+          <a href="reports.html" class="nav-item">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+              <rect x="3" y="5" width="14" height="12" rx="2" stroke="currentColor" stroke-width="1.5"/>
+              <path d="M7 3v4M13 3v4M3 9h14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+            <span>Reports</span>
+          </a>
+          <a href="integrations.html" class="nav-item">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+              <circle cx="10" cy="10" r="7" stroke="currentColor" stroke-width="1.5"/>
+              <path d="M10 10l5-5M10 10v-4M10 10H6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+            <span>Integrations</span>
+          </a>
+        </nav>
+
+        <div class="sidebar-footer">
+          <a href="settings.html" class="nav-item">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+              <circle cx="10" cy="10" r="7" stroke="currentColor" stroke-width="1.5"/>
+              <path d="M10 7v3M10 13.5v.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+            <span>Settings</span>
+          </a>
+        </div>
+      </aside>
+
+      <main class="dashboard-main">
+        <header class="dashboard-header">
+          <div class="header-left">
+            <button class="mobile-menu-toggle" data-mobile-toggle aria-label="Toggle menu">
+              <span></span><span></span><span></span>
+            </button>
+            <h1>Customers</h1>
+          </div>
+          <div class="header-right">
+            <div class="header-search">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                <circle cx="7" cy="7" r="5" stroke="currentColor" stroke-width="1.5"/>
+                <path d="M11 11l3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+              </svg>
+              <input type="search" placeholder="Search customers... (⌘K)" aria-label="Search" />
+            </div>
+            <button class="header-action theme-toggle" aria-label="Toggle theme" data-theme-switcher>
+              <svg class="theme-icon theme-icon-light" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                <circle cx="10" cy="10" r="4" stroke="currentColor" stroke-width="1.5"/>
+                <path d="M10 2v2M10 16v2M18 10h-2M4 10H2M15.657 4.343l-1.414 1.414M5.757 14.243l-1.414 1.414M15.657 15.657l-1.414-1.414M5.757 5.757L4.343 4.343" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+              </svg>
+              <svg class="theme-icon theme-icon-dark" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+            <button class="header-action" aria-label="Notifications">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                <path d="M8 16h4M10 3v1m0 0a4 4 0 014 4v3l1.5 2H4.5L6 11V8a4 4 0 014-4z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+              </svg>
+              <span class="badge-dot"></span>
+            </button>
+            <div class="header-user">
+              <img src="data:image/svg+xml,%3Csvg width='32' height='32' xmlns='http://www.w3.org/2000/svg'%3E%3Crect fill='%236d7df7' width='32' height='32' rx='16'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='Inter' font-size='13' font-weight='600' fill='white'%3EAT%3C/text%3E%3C/svg%3E" alt="User" />
+              <span>Ava Thompson</span>
+            </div>
+          </div>
+        </header>
+
+        <div class="dashboard-content">
+          <div class="page-actions">
+            <div class="filter-group">
+              <select class="filter-select">
+                <option>All Customers</option>
+                <option>Active</option>
+                <option>Trial</option>
+                <option>Churned</option>
+              </select>
+              <select class="filter-select">
+                <option>All Plans</option>
+                <option>Enterprise</option>
+                <option>Growth</option>
+                <option>Starter</option>
+              </select>
+              <select class="filter-select">
+                <option>Sort by: Recent</option>
+                <option>Sort by: Name</option>
+                <option>Sort by: Revenue</option>
+                <option>Sort by: Health Score</option>
+              </select>
+            </div>
+            <button class="btn btn-primary">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                <path d="M8 3v10M3 8h10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+              </svg>
+              Add Customer
+            </button>
+          </div>
+
+          <div class="customer-grid">
+            <article class="customer-card">
+              <div class="customer-card-header">
+                <img src="data:image/svg+xml,%3Csvg width='48' height='48' xmlns='http://www.w3.org/2000/svg'%3E%3Crect fill='%236d7df7' width='48' height='48' rx='24'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='Inter' font-size='18' font-weight='600' fill='white'%3EN%3C/text%3E%3C/svg%3E" alt="" />
+                <div class="customer-card-info">
+                  <h3>Northstar Labs</h3>
+                  <p>contact@northstar.io</p>
+                </div>
+                <span class="health-badge excellent">98</span>
+              </div>
+              <div class="customer-card-stats">
+                <div class="stat-item">
+                  <span class="stat-label">MRR</span>
+                  <span class="stat-value">$2,400</span>
+                </div>
+                <div class="stat-item">
+                  <span class="stat-label">Plan</span>
+                  <span class="stat-value">Growth</span>
+                </div>
+                <div class="stat-item">
+                  <span class="stat-label">Since</span>
+                  <span class="stat-value">Jan 2024</span>
+                </div>
+              </div>
+              <div class="customer-card-footer">
+                <span class="status-badge active">Active</span>
+                <span class="activity-time">2 hours ago</span>
+              </div>
+            </article>
+
+            <article class="customer-card">
+              <div class="customer-card-header">
+                <img src="data:image/svg+xml,%3Csvg width='48' height='48' xmlns='http://www.w3.org/2000/svg'%3E%3Crect fill='%2340d8ff' width='48' height='48' rx='24'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='Inter' font-size='18' font-weight='600' fill='white'%3EB%3C/text%3E%3C/svg%3E" alt="" />
+                <div class="customer-card-info">
+                  <h3>Beamly Technologies</h3>
+                  <p>hello@beamly.com</p>
+                </div>
+                <span class="health-badge good">84</span>
+              </div>
+              <div class="customer-card-stats">
+                <div class="stat-item">
+                  <span class="stat-label">MRR</span>
+                  <span class="stat-value">$8,900</span>
+                </div>
+                <div class="stat-item">
+                  <span class="stat-label">Plan</span>
+                  <span class="stat-value">Enterprise</span>
+                </div>
+                <div class="stat-item">
+                  <span class="stat-label">Since</span>
+                  <span class="stat-value">Mar 2023</span>
+                </div>
+              </div>
+              <div class="customer-card-footer">
+                <span class="status-badge active">Active</span>
+                <span class="activity-time">5 hours ago</span>
+              </div>
+            </article>
+
+            <article class="customer-card">
+              <div class="customer-card-header">
+                <img src="data:image/svg+xml,%3Csvg width='48' height='48' xmlns='http://www.w3.org/2000/svg'%3E%3Crect fill='%2344df9e' width='48' height='48' rx='24'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='Inter' font-size='18' font-weight='600' fill='white'%3EV%3C/text%3E%3C/svg%3E" alt="" />
+                <div class="customer-card-info">
+                  <h3>Vertex Solutions</h3>
+                  <p>admin@vertex.co</p>
+                </div>
+                <span class="health-badge good">76</span>
+              </div>
+              <div class="customer-card-stats">
+                <div class="stat-item">
+                  <span class="stat-label">MRR</span>
+                  <span class="stat-value">$0</span>
+                </div>
+                <div class="stat-item">
+                  <span class="stat-label">Plan</span>
+                  <span class="stat-value">Trial</span>
+                </div>
+                <div class="stat-item">
+                  <span class="stat-label">Started</span>
+                  <span class="stat-value">Feb 5 2026</span>
+                </div>
+              </div>
+              <div class="customer-card-footer">
+                <span class="status-badge trial">Trial</span>
+                <span class="activity-time">1 day ago</span>
+              </div>
+            </article>
+
+            <article class="customer-card">
+              <div class="customer-card-header">
+                <img src="data:image/svg+xml,%3Csvg width='48' height='48' xmlns='http://www.w3.org/2000/svg'%3E%3Crect fill='%23ffa726' width='48' height='48' rx='24'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='Inter' font-size='18' font-weight='600' fill='white'%3EC%3C/text%3E%3C/svg%3E" alt="" />
+                <div class="customer-card-info">
+                  <h3>CloudSync Inc</h3>
+                  <p>team@cloudsync.io</p>
+                </div>
+                <span class="health-badge atrisk">52</span>
+              </div>
+              <div class="customer-card-stats">
+                <div class="stat-item">
+                  <span class="stat-label">MRR</span>
+                  <span class="stat-value">$690</span>
+                </div>
+                <div class="stat-item">
+                  <span class="stat-label">Plan</span>
+                  <span class="stat-value">Starter</span>
+                </div>
+                <div class="stat-item">
+                  <span class="stat-label">Since</span>
+                  <span class="stat-value">Sep 2025</span>
+                </div>
+              </div>
+              <div class="customer-card-footer">
+                <span class="status-badge active">Active</span>
+                <span class="activity-time">3 days ago</span>
+              </div>
+            </article>
+
+            <article class="customer-card">
+              <div class="customer-card-header">
+                <img src="data:image/svg+xml,%3Csvg width='48' height='48' xmlns='http://www.w3.org/2000/svg'%3E%3Crect fill='%23ff6b6b' width='48' height='48' rx='24'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='Inter' font-size='18' font-weight='600' fill='white'%3ED%3C/text%3E%3C/svg%3E" alt="" />
+                <div class="customer-card-info">
+                  <h3>DataFlow Systems</h3>
+                  <p>info@dataflow.net</p>
+                </div>
+                <span class="health-badge critical">12</span>
+              </div>
+              <div class="customer-card-stats">
+                <div class="stat-item">
+                  <span class="stat-label">MRR</span>
+                  <span class="stat-value">$0</span>
+                </div>
+                <div class="stat-item">
+                  <span class="stat-label">Plan</span>
+                  <span class="stat-value">—</span>
+                </div>
+                <div class="stat-item">
+                  <span class="stat-label">Churned</span>
+                  <span class="stat-value">Jan 28 2026</span>
+                </div>
+              </div>
+              <div class="customer-card-footer">
+                <span class="status-badge churned">Churned</span>
+                <span class="activity-time">2 weeks ago</span>
+              </div>
+            </article>
+
+            <article class="customer-card">
+              <div class="customer-card-header">
+                <img src="data:image/svg+xml,%3Csvg width='48' height='48' xmlns='http://www.w3.org/2000/svg'%3E%3Crect fill='%23a78bfa' width='48' height='48' rx='24'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='Inter' font-size='18' font-weight='600' fill='white'%3ET%3C/text%3E%3C/svg%3E" alt="" />
+                <div class="customer-card-info">
+                  <h3>TechFlow Analytics</h3>
+                  <p>support@techflow.io</p>
+                </div>
+                <span class="health-badge excellent">92</span>
+              </div>
+              <div class="customer-card-stats">
+                <div class="stat-item">
+                  <span class="stat-label">MRR</span>
+                  <span class="stat-value">$5,200</span>
+                </div>
+                <div class="stat-item">
+                  <span class="stat-label">Plan</span>
+                  <span class="stat-value">Growth</span>
+                </div>
+                <div class="stat-item">
+                  <span class="stat-label">Since</span>
+                  <span class="stat-value">Jun 2024</span>
+                </div>
+              </div>
+              <div class="customer-card-footer">
+                <span class="status-badge active">Active</span>
+                <span class="activity-time">6 hours ago</span>
+              </div>
+            </article>
+          </div>
+        </div>
+      </main>
+    </div>
+  </body>
+</html>

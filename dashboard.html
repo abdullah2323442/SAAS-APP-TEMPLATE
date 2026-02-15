@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard — AuroraFlow</title>
+    <meta name="description" content="AuroraFlow admin dashboard" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/dashboard.css" />
+    <script>
+      // Apply theme immediately to prevent flash
+      (function() {
+        const savedTheme = localStorage.getItem('auroraflow-theme');
+        if (savedTheme === 'light' || savedTheme === 'dark') {
+          document.documentElement.setAttribute('data-theme', savedTheme);
+        } else {
+          const prefersDark = !window.matchMedia('(prefers-color-scheme: light)').matches;
+          document.documentElement.setAttribute('data-theme', prefersDark ? 'dark' : 'light');
+        }
+      })();
+    </script>
+    <script defer src="js/main.js"></script>
+    <script defer src="js/dashboard.js"></script>
+  </head>
+  <body class="dashboard-layout">
+    <div class="dashboard-shell">
+      <aside class="dashboard-sidebar" data-sidebar>
+        <div class="sidebar-header">
+          <a class="brand" href="index.html">
+            <span class="brand-mark"></span>
+            <span>AuroraFlow</span>
+          </a>
+          <button class="sidebar-toggle" data-sidebar-toggle aria-label="Toggle sidebar">
+            <span></span><span></span><span></span>
+          </button>
+        </div>
+
+        <nav class="sidebar-nav">
+          <a href="dashboard.html" class="nav-item active">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+              <rect x="3" y="3" width="6" height="6" rx="1.5" stroke="currentColor" stroke-width="1.5"/>
+              <rect x="11" y="3" width="6" height="6" rx="1.5" stroke="currentColor" stroke-width="1.5"/>
+              <rect x="3" y="11" width="6" height="6" rx="1.5" stroke="currentColor" stroke-width="1.5"/>
+              <rect x="11" y="11" width="6" height="6" rx="1.5" stroke="currentColor" stroke-width="1.5"/>
+            </svg>
+            <span>Overview</span>
+          </a>
+          <a href="customers.html" class="nav-item">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+              <circle cx="10" cy="7" r="3.5" stroke="currentColor" stroke-width="1.5"/>
+              <path d="M4 17c0-3.3 2.7-6 6-6s6 2.7 6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+            <span>Customers</span>
+          </a>
+          <a href="workflows.html" class="nav-item">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+              <path d="M3 10h14M10 3v14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+              <rect x="3" y="3" width="14" height="14" rx="2" stroke="currentColor" stroke-width="1.5"/>
+            </svg>
+            <span>Workflows</span>
+          </a>
+          <a href="analytics.html" class="nav-item">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+              <path d="M3 6l7-3 7 3v8l-7 3-7-3V6z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+              <path d="M3 6l7 3m0 0l7-3m-7 3v8" stroke="currentColor" stroke-width="1.5"/>
+            </svg>
+            <span>Analytics</span>
+          </a>
+          <a href="automations.html" class="nav-item">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+              <circle cx="10" cy="10" r="7" stroke="currentColor" stroke-width="1.5"/>
+              <path d="M10 6v4l3 2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+            <span>Automations</span>
+          </a>
+          <a href="reports.html" class="nav-item">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+              <rect x="3" y="5" width="14" height="12" rx="2" stroke="currentColor" stroke-width="1.5"/>
+              <path d="M7 3v4M13 3v4M3 9h14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+            <span>Reports</span>
+          </a>
+          <a href="integrations.html" class="nav-item">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+              <circle cx="10" cy="10" r="7" stroke="currentColor" stroke-width="1.5"/>
+              <path d="M10 10l5-5M10 10v-4M10 10H6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+            <span>Integrations</span>
+          </a>
+        </nav>
+
+        <div class="sidebar-footer">
+          <a href="settings.html" class="nav-item">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+              <circle cx="10" cy="10" r="7" stroke="currentColor" stroke-width="1.5"/>
+              <path d="M10 7v3M10 13.5v.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+            <span>Settings</span>
+          </a>
+        </div>
+      </aside>
+
+      <main class="dashboard-main">
+        <header class="dashboard-header">
+          <div class="header-left">
+            <button class="mobile-menu-toggle" data-mobile-toggle aria-label="Toggle menu">
+              <span></span><span></span><span></span>
+            </button>
+            <h1>Dashboard Overview</h1>
+          </div>
+          <div class="header-right">
+            <div class="header-search">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                <circle cx="7" cy="7" r="5" stroke="currentColor" stroke-width="1.5"/>
+                <path d="M11 11l3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+              </svg>
+              <input type="search" placeholder="Search customers... (⌘K)" aria-label="Search" />
+            </div>
+            <button class="header-action theme-toggle" aria-label="Toggle theme" data-theme-switcher>
+              <svg class="theme-icon theme-icon-light" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                <circle cx="10" cy="10" r="4" stroke="currentColor" stroke-width="1.5"/>
+                <path d="M10 2v2M10 16v2M18 10h-2M4 10H2M15.657 4.343l-1.414 1.414M5.757 14.243l-1.414 1.414M15.657 15.657l-1.414-1.414M5.757 5.757L4.343 4.343" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+              </svg>
+              <svg class="theme-icon theme-icon-dark" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+            <button class="header-action" aria-label="Notifications">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                <path d="M8 16h4M10 3v1m0 0a4 4 0 014 4v3l1.5 2H4.5L6 11V8a4 4 0 014-4z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+              </svg>
+              <span class="badge-dot"></span>
+            </button>
+            <div class="header-user">
+              <img src="data:image/svg+xml,%3Csvg width='32' height='32' xmlns='http://www.w3.org/2000/svg'%3E%3Crect fill='%236d7df7' width='32' height='32' rx='16'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='Inter' font-size='13' font-weight='600' fill='white'%3EAT%3C/text%3E%3C/svg%3E" alt="User" />
+              <span>Ava Thompson</span>
+            </div>
+          </div>
+        </header>
+
+        <div class="dashboard-content">
+          <div class="stats-grid">
+            <article class="stat-card">
+              <div class="stat-header">
+                <span class="stat-label">Active Customers</span>
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                  <circle cx="10" cy="7" r="3" stroke="currentColor" stroke-width="1.5"/>
+                  <path d="M4 16c0-3 2.7-5.5 6-5.5s6 2.5 6 5.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                </svg>
+              </div>
+              <div class="stat-value" data-counter="1247">0</div>
+              <div class="stat-footer">
+                <span class="stat-change positive">+12.3%</span>
+                <span class="stat-period">vs last month</span>
+              </div>
+            </article>
+
+            <article class="stat-card">
+              <div class="stat-header">
+                <span class="stat-label">Monthly Revenue</span>
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                  <path d="M4 10h12M13 6l3 4-3 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
+              <div class="stat-value">$<span data-counter="87">0</span>K</div>
+              <div class="stat-footer">
+                <span class="stat-change positive">+8.7%</span>
+                <span class="stat-period">vs last month</span>
+              </div>
+            </article>
+
+            <article class="stat-card">
+              <div class="stat-header">
+                <span class="stat-label">Active Workflows</span>
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                  <rect x="3" y="3" width="14" height="14" rx="2" stroke="currentColor" stroke-width="1.5"/>
+                  <path d="M7 10h6M10 7v6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                </svg>
+              </div>
+              <div class="stat-value" data-counter="342">0</div>
+              <div class="stat-footer">
+                <span class="stat-change positive">+24</span>
+                <span class="stat-period">this week</span>
+              </div>
+            </article>
+
+            <article class="stat-card">
+              <div class="stat-header">
+                <span class="stat-label">Avg Response Time</span>
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                  <circle cx="10" cy="10" r="7" stroke="currentColor" stroke-width="1.5"/>
+                  <path d="M10 6v4l2.5 2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                </svg>
+              </div>
+              <div class="stat-value"><span data-counter="2">0</span>.<span data-counter="4">0</span>h</div>
+              <div class="stat-footer">
+                <span class="stat-change negative">-18%</span>
+                <span class="stat-period">improvement</span>
+              </div>
+            </article>
+          </div>
+
+          <div class="dashboard-grid">
+            <section class="dashboard-card chart-card">
+              <div class="card-header">
+                <h3>Revenue Trend</h3>
+                <select class="period-select">
+                  <option>Last 7 days</option>
+                  <option selected>Last 30 days</option>
+                  <option>Last 90 days</option>
+                </select>
+              </div>
+              <div class="chart-container">
+                <canvas id="revenueChart" data-chart="revenue"></canvas>
+              </div>
+            </section>
+
+            <section class="dashboard-card">
+              <div class="card-header">
+                <h3>Health Score Distribution</h3>
+              </div>
+              <div class="health-list">
+                <div class="health-item">
+                  <span class="health-label">Excellent</span>
+                  <div class="health-bar">
+                    <span class="health-fill" style="--w: 42%; --color: #44df9e"></span>
+                  </div>
+                  <span class="health-value">42%</span>
+                </div>
+                <div class="health-item">
+                  <span class="health-label">Good</span>
+                  <div class="health-bar">
+                    <span class="health-fill" style="--w: 31%; --color: #40d8ff"></span>
+                  </div>
+                  <span class="health-value">31%</span>
+                </div>
+                <div class="health-item">
+                  <span class="health-label">At Risk</span>
+                  <div class="health-bar">
+                    <span class="health-fill" style="--w: 18%; --color: #ffa726"></span>
+                  </div>
+                  <span class="health-value">18%</span>
+                </div>
+                <div class="health-item">
+                  <span class="health-label">Critical</span>
+                  <div class="health-bar">
+                    <span class="health-fill" style="--w: 9%; --color: #ff6b6b"></span>
+                  </div>
+                  <span class="health-value">9%</span>
+                </div>
+              </div>
+            </section>
+          </div>
+
+          <section class="dashboard-card table-card">
+            <div class="card-header">
+              <h3>Recent Customer Activity</h3>
+              <button class="btn btn-sm btn-ghost">View All</button>
+            </div>
+            <div class="table-wrapper">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Customer</th>
+                    <th>Status</th>
+                    <th>Plan</th>
+                    <th>MRR</th>
+                    <th>Health</th>
+                    <th>Last Activity</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>
+                      <div class="table-customer">
+                        <img src="data:image/svg+xml,%3Csvg width='32' height='32' xmlns='http://www.w3.org/2000/svg'%3E%3Crect fill='%236d7df7' width='32' height='32' rx='16'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='Inter' font-size='13' font-weight='600' fill='white'%3EN%3C/text%3E%3C/svg%3E" alt="" />
+                        <div>
+                          <strong>Northstar Labs</strong>
+                          <span>contact@northstar.io</span>
+                        </div>
+                      </div>
+                    </td>
+                    <td><span class="status-badge active">Active</span></td>
+                    <td>Growth</td>
+                    <td>$2,400</td>
+                    <td><span class="health-badge excellent">98</span></td>
+                    <td>2 hours ago</td>
+                    <td><button class="action-btn">•••</button></td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <div class="table-customer">
+                        <img src="data:image/svg+xml,%3Csvg width='32' height='32' xmlns='http://www.w3.org/2000/svg'%3E%3Crect fill='%2340d8ff' width='32' height='32' rx='16'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='Inter' font-size='13' font-weight='600' fill='white'%3EB%3C/text%3E%3C/svg%3E" alt="" />
+                        <div>
+                          <strong>Beamly Technologies</strong>
+                          <span>hello@beamly.com</span>
+                        </div>
+                      </div>
+                    </td>
+                    <td><span class="status-badge active">Active</span></td>
+                    <td>Enterprise</td>
+                    <td>$8,900</td>
+                    <td><span class="health-badge good">84</span></td>
+                    <td>5 hours ago</td>
+                    <td><button class="action-btn">•••</button></td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <div class="table-customer">
+                        <img src="data:image/svg+xml,%3Csvg width='32' height='32' xmlns='http://www.w3.org/2000/svg'%3E%3Crect fill='%2344df9e' width='32' height='32' rx='16'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='Inter' font-size='13' font-weight='600' fill='white'%3EV%3C/text%3E%3C/svg%3E" alt="" />
+                        <div>
+                          <strong>Vertex Solutions</strong>
+                          <span>admin@vertex.co</span>
+                        </div>
+                      </div>
+                    </td>
+                    <td><span class="status-badge trial">Trial</span></td>
+                    <td>Growth</td>
+                    <td>$0</td>
+                    <td><span class="health-badge good">76</span></td>
+                    <td>1 day ago</td>
+                    <td><button class="action-btn">•••</button></td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <div class="table-customer">
+                        <img src="data:image/svg+xml,%3Csvg width='32' height='32' xmlns='http://www.w3.org/2000/svg'%3E%3Crect fill='%23ffa726' width='32' height='32' rx='16'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='Inter' font-size='13' font-weight='600' fill='white'%3EC%3C/text%3E%3C/svg%3E" alt="" />
+                        <div>
+                          <strong>CloudSync Inc</strong>
+                          <span>team@cloudsync.io</span>
+                        </div>
+                      </div>
+                    </td>
+                    <td><span class="status-badge active">Active</span></td>
+                    <td>Starter</td>
+                    <td>$690</td>
+                    <td><span class="health-badge atrisk">52</span></td>
+                    <td>3 days ago</td>
+                    <td><button class="action-btn">•••</button></td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <div class="table-customer">
+                        <img src="data:image/svg+xml,%3Csvg width='32' height='32' xmlns='http://www.w3.org/2000/svg'%3E%3Crect fill='%23ff6b6b' width='32' height='32' rx='16'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='Inter' font-size='13' font-weight='600' fill='white'%3ED%3C/text%3E%3C/svg%3E" alt="" />
+                        <div>
+                          <strong>DataFlow Systems</strong>
+                          <span>info@dataflow.net</span>
+                        </div>
+                      </div>
+                    </td>
+                    <td><span class="status-badge churned">Churned</span></td>
+                    <td>Growth</td>
+                    <td>$0</td>
+                    <td><span class="health-badge critical">12</span></td>
+                    <td>2 weeks ago</td>
+                    <td><button class="action-btn">•••</button></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+        </div>
+      </main>
+    </div>
+
+    <!-- Quick Actions FAB -->
+    <div class="quick-actions">
+      <button class="fab-button" aria-label="Quick actions" title="Add new customer">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M12 5v14M5 12h14" stroke-linecap="round"/>
+        </svg>
+      </button>
+    </div>
+  </body>
+</html>
