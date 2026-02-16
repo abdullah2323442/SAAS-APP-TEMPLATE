@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ecommerce Dashboard — AuroraFlow</title>
+    <meta name="description" content="AuroraFlow ecommerce operations dashboard" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/dashboard.css" />
+    <script src="js/theme-init.js"></script>
+    <script defer src="js/main.js"></script>
+    <script defer src="js/dashboard-shell.js"></script>
+    <script defer src="js/dashboard.js"></script>
+  </head>
+  <body class="dashboard-layout">
+    <div class="dashboard-shell" data-shell-page="dashboard" data-shell-title="Ecommerce Overview" data-shell-search="Search stores... (⌘K)" data-shell-fab-title="Add new store" data-shell-fab-icon="plus">
+      <div data-dashboard-sidebar></div>
+
+      <main class="dashboard-main">
+        <div data-dashboard-header></div>
+
+        <div class="dashboard-content">
+          <div class="stats-grid">
+            <article class="stat-card">
+              <div class="stat-header">
+                <span class="stat-label">Active Stores</span>
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                  <circle cx="10" cy="7" r="3" stroke="currentColor" stroke-width="1.5"/>
+                  <path d="M4 16c0-3 2.7-5.5 6-5.5s6 2.5 6 5.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                </svg>
+              </div>
+              <div class="stat-value" data-counter="1247">0</div>
+              <div class="stat-footer">
+                <span class="stat-change positive">+12.3%</span>
+                <span class="stat-period">vs last month</span>
+              </div>
+            </article>
+
+            <article class="stat-card">
+              <div class="stat-header">
+                <span class="stat-label">Monthly GMV</span>
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                  <path d="M4 10h12M13 6l3 4-3 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
+              <div class="stat-value">$<span data-counter="87">0</span>K</div>
+              <div class="stat-footer">
+                <span class="stat-change positive">+8.7%</span>
+                <span class="stat-period">vs last month</span>
+              </div>
+            </article>
+
+            <article class="stat-card">
+              <div class="stat-header">
+                <span class="stat-label">Orders Today</span>
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                  <rect x="3" y="3" width="14" height="14" rx="2" stroke="currentColor" stroke-width="1.5"/>
+                  <path d="M7 10h6M10 7v6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                </svg>
+              </div>
+              <div class="stat-value" data-counter="342">0</div>
+              <div class="stat-footer">
+                <span class="stat-change positive">+24</span>
+                <span class="stat-period">this week</span>
+              </div>
+            </article>
+
+            <article class="stat-card">
+              <div class="stat-header">
+                <span class="stat-label">Avg Fulfillment Time</span>
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                  <circle cx="10" cy="10" r="7" stroke="currentColor" stroke-width="1.5"/>
+                  <path d="M10 6v4l2.5 2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                </svg>
+              </div>
+              <div class="stat-value"><span data-counter="2">0</span>.<span data-counter="4">0</span>h</div>
+              <div class="stat-footer">
+                <span class="stat-change negative">-18%</span>
+                <span class="stat-period">improvement</span>
+              </div>
+            </article>
+          </div>
+
+          <div class="dashboard-grid">
+            <section class="dashboard-card chart-card">
+              <div class="card-header">
+                <h3>GMV Trend</h3>
+                <select class="period-select">
+                  <option>Last 7 days</option>
+                  <option selected>Last 30 days</option>
+                  <option>Last 90 days</option>
+                </select>
+              </div>
+              <div class="chart-container">
+                <canvas id="revenueChart" data-chart="revenue"></canvas>
+              </div>
+            </section>
+
+            <section class="dashboard-card">
+              <div class="card-header">
+                <h3>Store Health Distribution</h3>
+              </div>
+              <div class="health-list">
+                <div class="health-item">
+                  <span class="health-label">Excellent</span>
+                  <div class="health-bar">
+                    <span class="health-fill" style="--w: 42%; --color: #44df9e"></span>
+                  </div>
+                  <span class="health-value">42%</span>
+                </div>
+                <div class="health-item">
+                  <span class="health-label">Good</span>
+                  <div class="health-bar">
+                    <span class="health-fill" style="--w: 31%; --color: #40d8ff"></span>
+                  </div>
+                  <span class="health-value">31%</span>
+                </div>
+                <div class="health-item">
+                  <span class="health-label">At Risk</span>
+                  <div class="health-bar">
+                    <span class="health-fill" style="--w: 18%; --color: #ffa726"></span>
+                  </div>
+                  <span class="health-value">18%</span>
+                </div>
+                <div class="health-item">
+                  <span class="health-label">Critical</span>
+                  <div class="health-bar">
+                    <span class="health-fill" style="--w: 9%; --color: #ff6b6b"></span>
+                  </div>
+                  <span class="health-value">9%</span>
+                </div>
+              </div>
+            </section>
+          </div>
+
+          <section class="dashboard-card table-card">
+            <div class="card-header">
+              <h3>Recent Store Activity</h3>
+              <button class="btn btn-sm btn-ghost">View All</button>
+            </div>
+            <div class="table-wrapper">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Store</th>
+                    <th>Status</th>
+                    <th>Plan</th>
+                    <th>GMV</th>
+                    <th>Health</th>
+                    <th>Last Activity</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>
+                      <div class="table-customer">
+                        <img src="data:image/svg+xml,%3Csvg width='32' height='32' xmlns='http://www.w3.org/2000/svg'%3E%3Crect fill='%236d7df7' width='32' height='32' rx='16'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='Inter' font-size='13' font-weight='600' fill='white'%3EN%3C/text%3E%3C/svg%3E" alt="" />
+                        <div>
+                          <strong>Northstar Labs</strong>
+                          <span>contact@northstar.io</span>
+                        </div>
+                      </div>
+                    </td>
+                    <td><span class="status-badge active">Active</span></td>
+                    <td>Growth</td>
+                    <td>$2,400</td>
+                    <td><span class="health-badge excellent">98</span></td>
+                    <td>2 hours ago</td>
+                    <td><button class="action-btn">•••</button></td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <div class="table-customer">
+                        <img src="data:image/svg+xml,%3Csvg width='32' height='32' xmlns='http://www.w3.org/2000/svg'%3E%3Crect fill='%2340d8ff' width='32' height='32' rx='16'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='Inter' font-size='13' font-weight='600' fill='white'%3EB%3C/text%3E%3C/svg%3E" alt="" />
+                        <div>
+                          <strong>Beamly Technologies</strong>
+                          <span>hello@beamly.com</span>
+                        </div>
+                      </div>
+                    </td>
+                    <td><span class="status-badge active">Active</span></td>
+                    <td>Enterprise</td>
+                    <td>$8,900</td>
+                    <td><span class="health-badge good">84</span></td>
+                    <td>5 hours ago</td>
+                    <td><button class="action-btn">•••</button></td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <div class="table-customer">
+                        <img src="data:image/svg+xml,%3Csvg width='32' height='32' xmlns='http://www.w3.org/2000/svg'%3E%3Crect fill='%2344df9e' width='32' height='32' rx='16'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='Inter' font-size='13' font-weight='600' fill='white'%3EV%3C/text%3E%3C/svg%3E" alt="" />
+                        <div>
+                          <strong>Vertex Solutions</strong>
+                          <span>admin@vertex.co</span>
+                        </div>
+                      </div>
+                    </td>
+                    <td><span class="status-badge trial">Trial</span></td>
+                    <td>Growth</td>
+                    <td>$0</td>
+                    <td><span class="health-badge good">76</span></td>
+                    <td>1 day ago</td>
+                    <td><button class="action-btn">•••</button></td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <div class="table-customer">
+                        <img src="data:image/svg+xml,%3Csvg width='32' height='32' xmlns='http://www.w3.org/2000/svg'%3E%3Crect fill='%23ffa726' width='32' height='32' rx='16'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='Inter' font-size='13' font-weight='600' fill='white'%3EC%3C/text%3E%3C/svg%3E" alt="" />
+                        <div>
+                          <strong>CloudSync Inc</strong>
+                          <span>team@cloudsync.io</span>
+                        </div>
+                      </div>
+                    </td>
+                    <td><span class="status-badge active">Active</span></td>
+                    <td>Starter</td>
+                    <td>$690</td>
+                    <td><span class="health-badge atrisk">52</span></td>
+                    <td>3 days ago</td>
+                    <td><button class="action-btn">•••</button></td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <div class="table-customer">
+                        <img src="data:image/svg+xml,%3Csvg width='32' height='32' xmlns='http://www.w3.org/2000/svg'%3E%3Crect fill='%23ff6b6b' width='32' height='32' rx='16'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='Inter' font-size='13' font-weight='600' fill='white'%3ED%3C/text%3E%3C/svg%3E" alt="" />
+                        <div>
+                          <strong>DataFlow Systems</strong>
+                          <span>info@dataflow.net</span>
+                        </div>
+                      </div>
+                    </td>
+                    <td><span class="status-badge churned">Churned</span></td>
+                    <td>Growth</td>
+                    <td>$0</td>
+                    <td><span class="health-badge critical">12</span></td>
+                    <td>2 weeks ago</td>
+                    <td><button class="action-btn">•••</button></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+        </div>
+      </main>
+    </div>
+
+  </body>
+</html>
