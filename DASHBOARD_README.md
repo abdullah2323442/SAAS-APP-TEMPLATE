@@ -1,22 +1,22 @@
-# AuroraFlow SaaS Dashboard
+# AuroraFlow Ecommerce Dashboard
 
-## Production-Grade Admin Dashboard
+## Production-Grade Store Operations Dashboard
 
-A fully responsive, feature-rich admin dashboard built with vanilla HTML, CSS, and JavaScript.
+A fully responsive, feature-rich ecommerce admin dashboard built with vanilla HTML, CSS, and JavaScript.
 
 ### Features
 
 #### Core Components
 - **Responsive Sidebar Navigation** - Collapsible sidebar with icon-based navigation
-- **Top Header Bar** - User profile, notifications, theme switcher
+- **Top Header Bar** - Store manager profile, notifications, theme switcher
 - **Real-time Statistics** - 4 animated KPI cards with trend indicators
-- **Revenue Chart** - Canvas-based line chart with gradient fills
-- **Health Score Visualization** - Animated progress bars with color coding
-- **Data Table** - Responsive customer activity table with status badges
+- **GMV Chart** - Canvas-based line chart with gradient fills
+- **Store Health Visualization** - Animated progress bars with color coding
+- **Data Table** - Responsive order activity table with status badges
 
 #### Interactive Elements
 - **Animated Counters** - Numbers count up on scroll into view
-- **Canvas Charts** - High-performance revenue trend visualization
+- **Canvas Charts** - High-performance GMV trend visualization
 - **Health Bars** - Animated progress indicators
 - **Mobile Menu** - Touch-friendly hamburger navigation
 - **Theme Switcher** - Light/dark mode toggle with localStorage persistence
@@ -37,13 +37,14 @@ css/
   style.css            - Shared design system (updated with nav-highlight)
 js/
   dashboard.js         - Dashboard interactions & chart rendering
+  dashboard-shell.js   - Shared sidebar/header renderer + configurable quick-action FAB for dashboard pages
   main.js              - Shared utilities (theme switcher, etc.)
   theme-init.js        - Shared early theme initialization for all pages
 ```
 
 ### Key Technologies
 
-- **Canvas API** - For rendering the revenue trend chart
+- **Canvas API** - For rendering the GMV trend chart
 - **IntersectionObserver** - For scroll-triggered animations
 - **CSS Custom Properties** - For theme switching and design tokens
 - **CSS Grid & Flexbox** - For responsive layouts
@@ -58,27 +59,27 @@ js/
 ### Dashboard Statistics
 
 The dashboard displays:
-- **Active Customers**: 1,247 (+12.3% vs last month)
-- **Monthly Revenue**: $87K (+8.7% vs last month)
-- **Active Workflows**: 342 (+24 this week)
-- **Avg Response Time**: 2.4h (-18% improvement)
+- **Active Stores**: 1,247 (+12.3% vs last month)
+- **Monthly GMV**: $87K (+8.7% vs last month)
+- **Orders Processed**: 342 (+24 this week)
+- **Avg Fulfillment Time**: 2.4h (-18% improvement)
 
-### Health Score Distribution
+### Store Health Distribution
 
 - Excellent: 42%
 - Good: 31%
 - At Risk: 18%
 - Critical: 9%
 
-### Customer Activity Table
+### Order Activity Table
 
-Displays recent customer activity with:
-- Customer name and avatar
-- Status badge (Active, Trial, Churned)
-- Subscription plan tier
-- Monthly Recurring Revenue (MRR)
-- Health score (0-100, color-coded)
-- Last activity timestamp
+Displays recent order activity with:
+- Order ID and customer
+- Status badge (Paid, Processing, Refunded)
+- Sales channel
+- Order value (AOV)
+- Fulfillment health score (0-100, color-coded)
+- Last update timestamp
 - Action menu (•••)
 
 ### Customization Guide
@@ -86,7 +87,7 @@ Displays recent customer activity with:
 #### Modify Chart Data
 Edit `js/dashboard.js`, line ~88:
 ```javascript
-const data = [45, 52, 48, ...]; // Revenue data points
+const data = [45, 52, 48, ...]; // GMV data points
 ```
 
 #### Update KPI Values
@@ -146,7 +147,7 @@ Potential additions for production:
 - Advanced filtering and sorting
 - Export functionality (CSV, PDF)
 - Custom date range selector
-- Drill-down views for individual customers
+- Drill-down views for individual stores
 - Inline editing capabilities
 - Bulk action support
 - Search functionality
