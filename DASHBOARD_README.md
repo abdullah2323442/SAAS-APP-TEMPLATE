@@ -38,6 +38,7 @@ css/
 js/
   dashboard.js         - Dashboard interactions & chart rendering
   main.js              - Shared utilities (theme switcher, etc.)
+  theme-init.js        - Shared early theme initialization for all pages
 ```
 
 ### Key Technologies
@@ -132,8 +133,9 @@ Requires modern CSS features:
 ### Accessibility
 
 - Semantic HTML structure
-- ARIA labels on interactive elements
-- Keyboard navigation support
+- Runtime ARIA labels for icon-only controls (`.icon-btn`, `.action-btn`, `.card-menu`)
+- Keyboard navigation support (including Enter/Space activation on data table rows)
+- Toggle state semantics (`aria-expanded`, `aria-controls`, and `aria-pressed`) for menus and theme switchers
 - Color contrast ratios meet WCAG AA standards
 - Reduced-motion media query support (inherited from main.css)
 

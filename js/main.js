@@ -73,24 +73,31 @@ const setTheme = (theme) => {
   document.documentElement.setAttribute("data-theme", theme);
 };
 
+const updateThemeToggleA11y = (toggle, theme) => {
+  const isDark = theme === "dark";
+  toggle.setAttribute("aria-pressed", isDark ? "true" : "false");
+  toggle.setAttribute("aria-label", isDark ? "Switch to light theme" : "Switch to dark theme");
+  toggle.title = isDark ? "Light mode" : "Dark mode";
+};
+
 const initializeThemeSwitcher = () => {
   // Check if there's already a theme toggle button (e.g., on dashboard)
   const existingToggle = document.querySelector("[data-theme-switcher]");
   
   if (existingToggle) {
-    // Dashboard or other pages with pre-existing toggle
     let activeTheme = getPreferredTheme();
     setTheme(activeTheme);
+    updateThemeToggleA11y(existingToggle, activeTheme);
 
     existingToggle.addEventListener("click", () => {
       activeTheme = activeTheme === "dark" ? "light" : "dark";
       setTheme(activeTheme);
       localStorage.setItem(THEME_KEY, activeTheme);
+      updateThemeToggleA11y(existingToggle, activeTheme);
     });
     return;
   }
 
-  // Marketing pages - create and append toggle button
   if (!navWrap) return;
 
   const toggle = document.createElement("button");
@@ -99,8 +106,7 @@ const initializeThemeSwitcher = () => {
 
   const updateToggleLabel = (theme) => {
     toggle.textContent = theme === "dark" ? "☀" : "☾";
-    toggle.setAttribute("aria-label", theme === "dark" ? "Switch to light theme" : "Switch to dark theme");
-    toggle.title = theme === "dark" ? "Light mode" : "Dark mode";
+    updateThemeToggleA11y(toggle, theme);
   };
 
   let activeTheme = getPreferredTheme();
@@ -120,12 +126,23 @@ const initializeThemeSwitcher = () => {
 initializeThemeSwitcher();
 
 if (menuToggle && nav) {
+  if (!nav.id) {
+    nav.id = "primary-nav";
+  }
+
+  menuToggle.setAttribute("aria-controls", nav.id);
+  menuToggle.setAttribute("aria-expanded", "false");
+
   menuToggle.addEventListener("click", () => {
-    nav.classList.toggle("open");
+    const isOpen = nav.classList.toggle("open");
+    menuToggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
   });
 
   nav.querySelectorAll("a").forEach((link) => {
-    link.addEventListener("click", () => nav.classList.remove("open"));
+    link.addEventListener("click", () => {
+      nav.classList.remove("open");
+      menuToggle.setAttribute("aria-expanded", "false");
+    });
   });
 }
 

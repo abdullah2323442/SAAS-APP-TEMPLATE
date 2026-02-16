@@ -3,6 +3,7 @@
 // ================================
 
 document.addEventListener('DOMContentLoaded', () => {
+  initializeDashboardAccessibility();
   initializeMobileMenu();
   initializeDashboardCounters();
   initializeChart();
@@ -10,6 +11,61 @@ document.addEventListener('DOMContentLoaded', () => {
   initializeDashboardAnimations();
   initializeQuickActions();
 });
+
+function initializeDashboardAccessibility() {
+  const iconLikeButtons = document.querySelectorAll('.icon-btn, .action-btn, .card-menu, .header-action, .sidebar-toggle, .mobile-menu-toggle, .fab-button');
+
+  iconLikeButtons.forEach((button) => {
+    if (!button.getAttribute('type')) {
+      button.setAttribute('type', 'button');
+    }
+
+    const hasAriaLabel = button.hasAttribute('aria-label');
+    const title = button.getAttribute('title');
+
+    if (!hasAriaLabel && title) {
+      button.setAttribute('aria-label', title);
+    }
+
+    if (!button.hasAttribute('aria-label')) {
+      if (button.classList.contains('action-btn')) {
+        button.setAttribute('aria-label', 'Open row actions');
+      } else if (button.classList.contains('card-menu')) {
+        button.setAttribute('aria-label', 'Open integration options');
+      } else if (button.classList.contains('icon-btn')) {
+        const cardTitle = button.closest('article')?.querySelector('h3')?.textContent?.trim();
+        button.setAttribute('aria-label', cardTitle ? `Open actions for ${cardTitle}` : 'Open actions');
+      }
+    }
+
+    if (!button.getAttribute('title') && button.getAttribute('aria-label')) {
+      button.setAttribute('title', button.getAttribute('aria-label'));
+    }
+
+    if (button.classList.contains('action-btn') || button.classList.contains('card-menu')) {
+      button.setAttribute('aria-haspopup', 'menu');
+    }
+  });
+
+  const iconSvgs = document.querySelectorAll('.icon-btn svg, .action-btn svg, .card-menu svg, .header-action svg, .sidebar-toggle svg, .mobile-menu-toggle svg, .fab-button svg');
+  iconSvgs.forEach((svg) => {
+    svg.setAttribute('aria-hidden', 'true');
+    svg.setAttribute('focusable', 'false');
+  });
+
+  const tableRows = document.querySelectorAll('.data-table tbody tr');
+  tableRows.forEach((row) => {
+    row.setAttribute('role', 'button');
+    row.setAttribute('tabindex', '0');
+
+    row.addEventListener('keydown', (event) => {
+      if (event.key !== 'Enter' && event.key !== ' ') return;
+      if (event.target.closest('button, a, input, select, textarea')) return;
+      event.preventDefault();
+      row.click();
+    });
+  });
+}
 
 // ================================
 // Dashboard Entry Animations
@@ -73,15 +129,31 @@ function initializeMobileMenu() {
   const sidebar = document.querySelector('[data-sidebar]');
   const sidebarToggle = document.querySelector('[data-sidebar-toggle]');
 
+  if (sidebar && !sidebar.id) {
+    sidebar.id = 'dashboard-sidebar';
+  }
+
+  if (mobileToggle && sidebar) {
+    mobileToggle.setAttribute('aria-controls', sidebar.id);
+    mobileToggle.setAttribute('aria-expanded', 'false');
+  }
+
+  if (sidebarToggle && sidebar) {
+    sidebarToggle.setAttribute('aria-controls', sidebar.id);
+    sidebarToggle.setAttribute('aria-expanded', sidebar.classList.contains('collapsed') ? 'true' : 'false');
+  }
+
   if (mobileToggle && sidebar) {
     mobileToggle.addEventListener('click', () => {
-      sidebar.classList.toggle('open');
+      const isOpen = sidebar.classList.toggle('open');
+      mobileToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
     });
   }
 
   if (sidebarToggle && sidebar) {
     sidebarToggle.addEventListener('click', () => {
-      sidebar.classList.toggle('collapsed');
+      const isCollapsed = sidebar.classList.toggle('collapsed');
+      sidebarToggle.setAttribute('aria-expanded', isCollapsed ? 'true' : 'false');
     });
   }
 
@@ -90,6 +162,9 @@ function initializeMobileMenu() {
     if (window.innerWidth <= 768 && sidebar && sidebar.classList.contains('open')) {
       if (!sidebar.contains(e.target) && e.target !== mobileToggle) {
         sidebar.classList.remove('open');
+        if (mobileToggle) {
+          mobileToggle.setAttribute('aria-expanded', 'false');
+        }
       }
     }
   });
@@ -100,6 +175,9 @@ function initializeMobileMenu() {
     link.addEventListener('click', () => {
       if (window.innerWidth <= 768 && sidebar) {
         sidebar.classList.remove('open');
+        if (mobileToggle) {
+          mobileToggle.setAttribute('aria-expanded', 'false');
+        }
       }
     });
   });
